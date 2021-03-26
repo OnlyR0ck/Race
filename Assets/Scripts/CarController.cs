@@ -9,7 +9,6 @@ public class CarController : MonoBehaviour
     [SerializeField] private string _leadRoad;
     [SerializeField] private Transform _groundChecker;
     [SerializeField] private ParticleSystem _confetti;
-    private bool _flag = true;
     public enum Drivetrain {FWD,
         RWD,
         FourWD};
@@ -28,6 +27,7 @@ public class CarController : MonoBehaviour
     public WheelCollider frontLeftWheel;
     public WheelCollider rearRightWheel;
     public WheelCollider rearLeftWheel;
+    private WheelCollider[] _wheelColliders;
 
     [Header("Wheels")] 
     public Transform frontRightTransform;
@@ -39,6 +39,7 @@ public class CarController : MonoBehaviour
     private void Start()
     {
         verticalInput = 1;
+        _wheelColliders = new[] {frontRightWheel, frontLeftWheel, rearRightWheel, rearLeftWheel};
 
     }
 
@@ -89,25 +90,21 @@ public class CarController : MonoBehaviour
 
     private void GroundCheck()
     {
-        RaycastHit hit;
-        
-        if (Physics.Raycast(_groundChecker.position, Vector3.down, out hit, 10f))
+        if (Physics.Raycast(_groundChecker.position, Vector3.down, out var hit, 10f))
         {
-            if (!hit.collider.CompareTag(_leadRoad) && _flag)
+            if (!(hit.collider.CompareTag(_leadRoad) || hit.collider.CompareTag("Start")))
             {
-                var curve = new WheelFrictionCurve {extremumSlip = 500};
-                
-                _flag = false;
-                frontLeftWheel.forwardFriction = curve;
-                frontRightWheel.forwardFriction = curve;
-                rearLeftWheel.forwardFriction = curve;
-                rearRightWheel.forwardFriction = curve;
-                
-                frontLeftWheel.brakeTorque = 10000f;
-                frontRightWheel.brakeTorque = 10000f;
-                rearLeftWheel.brakeTorque = 10000f;
-                rearRightWheel.brakeTorque = 10000f;
-                
+                foreach (var wheel in _wheelColliders)
+                {
+                    //wheel.brakeTorque = 500;
+                }
+            }
+            else
+            {
+                foreach (var wheel in _wheelColliders)
+                {
+                    wheel.brakeTorque = 0;
+                }
             }
         }
     }

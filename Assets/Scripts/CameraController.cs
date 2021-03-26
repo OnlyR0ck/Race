@@ -4,13 +4,11 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform[] _targets;
     public Transform target;
-    private Vector3 _offset;
-    private Vector3 _tempOffset;
+    private readonly Vector3 _offset = new Vector3(8,5,10);
     private Vector3 _desiredPosition;
     private Vector3 _smoothedPosition;
     [SerializeField] [Range(0, 1f)] private float _smoothSpeed;
-
-
+    
     private void OnEnable()
     {
         ChangePlayerCarScript.PlayerCarIsChanged += TargetChangeHandler;
@@ -23,12 +21,6 @@ public class CameraController : MonoBehaviour
     private void TargetChangeHandler(int index)
     {
         target = _targets[index];
-
-    }
-
-    private void Start()
-    {
-        _offset = transform.position - target.position;
     }
 
     private void LateUpdate()
