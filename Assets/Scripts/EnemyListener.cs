@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyListener : MonoBehaviour
@@ -15,18 +17,23 @@ public class EnemyListener : MonoBehaviour
     }
     private void CarChangedHandler(int index)
     {
-        Transform _position = _vehicles[index - 1].transform;
-        _vehicles[index - 1].SetActive(false);
-        _vehicles[index].SetActive(true);
-        if (index == 1)
+        GameObject activeVehicle = GetActiveVehicle();
+        GameObject vehicle = _vehicles[index];
+        vehicle.transform.localPosition = activeVehicle.transform.localPosition;
+        activeVehicle.SetActive(false);
+
+
+        if (Physics.Raycast(vehicle.transform.position, Vector3.down, out var hit, 10f))
         {
-            _vehicles[index].transform.localPosition = new Vector3(_position.localPosition.x, -2.3f, 0.0f);
+            vehicle.transform.localPosition = new Vector3(vehicle.transform.localPosition.x, vehicle.transform.localPosition.y - hit.distance + 1, 0f);
+            //vehicle.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(hit.normal));
         }
-        else
-        {
-            _vehicles[index].transform.localRotation = Quaternion.Euler(new Vector3(0, -90, 0));
-            _vehicles[index].transform.localPosition = new Vector3(_position.localPosition.x, -2f, 0.0f);
-        }
+        vehicle.SetActive(true);
         
+    }
+    
+    private GameObject GetActiveVehicle()
+    {
+        return _vehicles.FirstOrDefault(vehicle => vehicle.activeSelf);
     }
 }

@@ -10,15 +10,14 @@ public class MotoController : MonoBehaviour
     [SerializeField] private Transform _centerOfMass;
     [SerializeField] private string _leadRoad;
     [SerializeField] private Transform _groundChecker;
-    private bool _flag = true;
-
+    [SerializeField] private ParticleSystem _confetti;
+    
     
      public enum Drivetrain {FWD,
         RWD,
         FourWD};
     
-    private float horizontalInput, verticalInput = 1;
-    private float steeringAngle;
+    private float verticalInput = 1;
     
     
     [Header("Car Settings")]
@@ -31,6 +30,7 @@ public class MotoController : MonoBehaviour
     public WheelCollider frontLeftWheel;
     public WheelCollider rearRightWheel;
     public WheelCollider rearLeftWheel;
+    private WheelCollider[] _wheelColliders;
 
     [Header("Wheels")] 
     public Transform frontWheel;
@@ -40,6 +40,7 @@ public class MotoController : MonoBehaviour
     {
         _motoRigidbody = GetComponent<Rigidbody>();
         _motoRigidbody.centerOfMass = _centerOfMass.localPosition;
+        _wheelColliders = new[] {frontRightWheel, frontLeftWheel, rearRightWheel, rearLeftWheel};
     }
     
 
@@ -64,13 +65,6 @@ public class MotoController : MonoBehaviour
         }
     }
 
-    private void Steer()
-    {
-        steeringAngle = maxSteeringAngle * horizontalInput;
-        frontLeftWheel.steerAngle = steeringAngle;
-        frontRightWheel.steerAngle = steeringAngle;
-    }
-
     private void UpdateWheelPoses()
     {
         UpdateWheelPose(frontRightWheel, frontWheel);
@@ -82,33 +76,41 @@ public class MotoController : MonoBehaviour
         Vector3 pos = wheelTransform.position;
         Quaternion rot = wheelTransform.rotation;
         wheelCollider.GetWorldPose(out pos,out rot);
-        //wheelTransform.position = pos;
+        //wheelTransform.position = pos; 'cause of four wheels 
         wheelTransform.rotation = rot;
     }
     
     private void GroundCheck()
     {
-        RaycastHit hit;
-        
-        if (Physics.Raycast(_groundChecker.position, Vector3.down, out hit, 10f))
+        if (!Physics.Raycast(_groundChecker.position, Vector3.down, out var hit, 10f)) return;
+        if (!(hit.collider.CompareTag(_leadRoad) || hit.collider.CompareTag("Start")))
         {
-            if (!hit.collider.CompareTag(_leadRoad) && _flag)
+            foreach (var wheel in _wheelColliders)
             {
-                var curve = new WheelFrictionCurve {extremumSlip = 500};
-                
-                _flag = false;
-                frontLeftWheel.forwardFriction = curve;
-                frontRightWheel.forwardFriction = curve;
-                rearLeftWheel.forwardFriction = curve;
-                rearRightWheel.forwardFriction = curve;
+                wheel.brakeTorque = 1000;
+            }
+        }
+        else
+        {
+            foreach (var wheel in _wheelColliders)
+            {
+                wheel.brakeTorque = 0;
             }
         }
     }
 
     private void FixedUpdate()
     {
-        Steer();
         Accelerate();
         UpdateWheelPoses();
+        GroundCheck();
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Finish"))
+        {
+            _confetti.Play();
+        }
     }
 }

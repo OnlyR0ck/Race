@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    public static event Action<int> LevelWasEnded; 
     [SerializeField] private string _leadRoad;
     [SerializeField] private Transform _groundChecker;
     [SerializeField] private ParticleSystem _confetti;
@@ -96,7 +97,7 @@ public class CarController : MonoBehaviour
             {
                 foreach (var wheel in _wheelColliders)
                 {
-                    //wheel.brakeTorque = 500;
+                    wheel.brakeTorque = 1000;
                 }
             }
             else
@@ -114,6 +115,7 @@ public class CarController : MonoBehaviour
         if (other.CompareTag("Finish"))
         {
             _confetti.Play();
+            LevelWasEnded?.Invoke(0);
         }
     }
 }

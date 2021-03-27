@@ -9,8 +9,8 @@ TagManager:
   - Hallway
   - Moto
   - Sport
-  - MotoEnemy
-  - SportEnemy
+  - Start
+  - Jeep
   layers:
   - Default
   - TransparentFX

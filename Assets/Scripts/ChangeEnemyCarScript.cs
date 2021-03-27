@@ -5,17 +5,30 @@ using UnityEngine;
 
 public class ChangeEnemyCarScript : MonoBehaviour
 {
+    [SerializeField] private float _delay;
     public static event Action<int> EnemyCarIsChanged;
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("MotoEnemy"))
+        if (other.tag.Equals(gameObject.tag)) return;
+        switch (other.tag)
         {
-            EnemyCarIsChanged?.Invoke(1);
+            case "Jeep":
+                StartCoroutine(ChangeCar(0));
+                break;
+            case "Moto":
+                StartCoroutine(ChangeCar(1));
+                break;
+            case "Sport":
+                StartCoroutine(ChangeCar(2));
+                break;
         }
-        else if (other.CompareTag("SportEnemy"))
-        {
-            EnemyCarIsChanged?.Invoke(2);
-        }
+    }
+
+    IEnumerator ChangeCar(int carIndex)
+    {
+        yield return new WaitForSeconds(_delay);
+        
+        EnemyCarIsChanged?.Invoke(carIndex);
     }
 }
