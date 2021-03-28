@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MotoController : MonoBehaviour
@@ -7,6 +8,7 @@ public class MotoController : MonoBehaviour
     [SerializeField] private string _leadRoad;
     [SerializeField] private Transform _groundChecker;
     [SerializeField] private ParticleSystem _confetti;
+    [SerializeField] private ParticleSystem _appearParticles;
     [SerializeField] private float _maxSpeed;
 
     
@@ -36,11 +38,17 @@ public class MotoController : MonoBehaviour
 
     private void Start()
     {
+        _appearParticles.Play();
         _motoRigidbody = GetComponent<Rigidbody>();
         _motoRigidbody.centerOfMass = _centerOfMass.localPosition;
         _wheelColliders = new[] {frontRightWheel, frontLeftWheel, rearRightWheel, rearLeftWheel};
     }
-    
+
+    private void OnEnable()
+    {
+        _appearParticles.Play();
+    }
+
 
     private void Accelerate()
     {

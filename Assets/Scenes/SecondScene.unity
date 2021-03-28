@@ -4112,7 +4112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6743065939641057553, guid: e16978a782561534cbbbad4e7c3a1303, type: 3}
       propertyPath: torque
-      value: 400
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6743065939641057553, guid: e16978a782561534cbbbad4e7c3a1303, type: 3}
       propertyPath: _groundChecker
@@ -4677,11 +4677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2049018817236755466, guid: be9fb29ee311f27469940fa137842707, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.320385
+      value: -7.820385
       objectReference: {fileID: 0}
     - target: {fileID: 2049018817236755466, guid: be9fb29ee311f27469940fa137842707, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1250153
+      value: 1.6250153
       objectReference: {fileID: 0}
     - target: {fileID: 2049018817236755466, guid: be9fb29ee311f27469940fa137842707, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12882,6 +12882,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 284689383}
     m_Modifications:
+    - target: {fileID: 470070889, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
+      propertyPath: torque
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1571078756, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -15215,6 +15219,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1198496133}
     m_Modifications:
+    - target: {fileID: 470070889, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
+      propertyPath: torque
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 470070889, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
       propertyPath: _leadRoad
       value: Dirt

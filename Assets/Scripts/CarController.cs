@@ -9,7 +9,8 @@ public class CarController : MonoBehaviour
     public static event Action<int> LevelWasEnded; 
     [SerializeField] private string _leadRoad;
     [SerializeField] private Transform _groundChecker;
-    [SerializeField] private ParticleSystem _confetti; 
+    [SerializeField] private ParticleSystem _confetti;
+    [SerializeField] private ParticleSystem _appearParticles;
     [SerializeField] private float _maxSpeed;
     private Rigidbody _carRigidbody;
 
@@ -46,6 +47,11 @@ public class CarController : MonoBehaviour
         _carRigidbody = GetComponent<Rigidbody>();
         _wheelColliders = new[] {frontRightWheel, frontLeftWheel, rearRightWheel, rearLeftWheel};
 
+    }
+
+    private void OnEnable()
+    {
+        _appearParticles.Play();
     }
 
     private void Accelerate()

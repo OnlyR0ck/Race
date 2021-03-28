@@ -429,6 +429,7 @@ MonoBehaviour:
   _leadRoad: Hallway
   _groundChecker: {fileID: 4138614417699241925}
   _confetti: {fileID: 58397107013908955}
+  _appearParticles: {fileID: 2667198555946431437}
   _maxSpeed: 8
   drivetrain: 2
   maxSteeringAngle: 0
@@ -1692,6 +1693,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2048158260679958693, guid: fbcec2d22d2609b45986b8d57706f3b3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048158260679958693, guid: fbcec2d22d2609b45986b8d57706f3b3, type: 3}
       propertyPath: InitialModule.startColor.minMaxState
       value: 4
       objectReference: {fileID: 0}
@@ -1835,11 +1840,24 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7638980896420829592, guid: fbcec2d22d2609b45986b8d57706f3b3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988993215593648250, guid: fbcec2d22d2609b45986b8d57706f3b3, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbcec2d22d2609b45986b8d57706f3b3, type: 3}
 --- !u!4 &2667198555946431439 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2048158260679958695, guid: fbcec2d22d2609b45986b8d57706f3b3, type: 3}
+  m_PrefabInstance: {fileID: 4138614417527100264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2667198555946431437 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2048158260679958693, guid: fbcec2d22d2609b45986b8d57706f3b3, type: 3}
   m_PrefabInstance: {fileID: 4138614417527100264}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6001538012108434479
