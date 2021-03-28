@@ -9,7 +9,10 @@ public class CarController : MonoBehaviour
     public static event Action<int> LevelWasEnded; 
     [SerializeField] private string _leadRoad;
     [SerializeField] private Transform _groundChecker;
-    [SerializeField] private ParticleSystem _confetti;
+    [SerializeField] private ParticleSystem _confetti; 
+    [SerializeField] private float _maxSpeed;
+    private Rigidbody _carRigidbody;
+
     public enum Drivetrain {FWD,
         RWD,
         FourWD};
@@ -40,6 +43,7 @@ public class CarController : MonoBehaviour
     private void Start()
     {
         verticalInput = 1;
+        _carRigidbody = GetComponent<Rigidbody>();
         _wheelColliders = new[] {frontRightWheel, frontLeftWheel, rearRightWheel, rearLeftWheel};
 
     }
@@ -87,6 +91,7 @@ public class CarController : MonoBehaviour
         Accelerate();
         UpdateWheelPoses();
         GroundCheck();
+        ClampSpeed(_maxSpeed);
     }
 
     private void GroundCheck()
@@ -95,27 +100,22 @@ public class CarController : MonoBehaviour
         {
             if (!(hit.collider.CompareTag(_leadRoad) || hit.collider.CompareTag("Start")))
             {
-                foreach (var wheel in _wheelColliders)
-                {
-                    wheel.brakeTorque = 1000;
-                }
-            }
-            else
-            {
-                foreach (var wheel in _wheelColliders)
-                {
-                    wheel.brakeTorque = 0;
-                }
+                ClampSpeed(_maxSpeed / 4);
             }
         }
     }
+    
+    
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Finish"))
-        {
-            _confetti.Play();
-            LevelWasEnded?.Invoke(0);
-        }
+        if (!other.CompareTag("Finish")) return;
+        _confetti.Play();
+        LevelWasEnded?.Invoke(0);
+    }
+
+    private void ClampSpeed(float magnitude)
+    {
+        _carRigidbody.velocity = Vector3.ClampMagnitude(_carRigidbody.velocity, magnitude);
     }
 }

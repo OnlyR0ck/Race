@@ -2057,9 +2057,10 @@ GameObject:
   m_Component:
   - component: {fileID: 284689383}
   - component: {fileID: 284689385}
+  - component: {fileID: 284689384}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2081,6 +2082,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &284689384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284689382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b72b7b5cb59b6469cb3b3589e458a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vehicles:
+  - {fileID: 1228403064}
+  - {fileID: 1257115679}
+  - {fileID: 296058340}
 --- !u!114 &284689385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2319,6 +2336,10 @@ PrefabInstance:
     - target: {fileID: 6743065939641057553, guid: e16978a782561534cbbbad4e7c3a1303, type: 3}
       propertyPath: torque
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743065939641057553, guid: e16978a782561534cbbbad4e7c3a1303, type: 3}
+      propertyPath: _maxSpeed
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6743065939641057553, guid: e16978a782561534cbbbad4e7c3a1303, type: 3}
       propertyPath: _groundChecker
@@ -8545,6 +8566,10 @@ PrefabInstance:
       propertyPath: _leadRoad
       value: Hallway
       objectReference: {fileID: 0}
+    - target: {fileID: 4138614417921654246, guid: 3bc6498204ab9b74c8b50b69039452a3, type: 3}
+      propertyPath: _maxSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4138614418797580158, guid: 3bc6498204ab9b74c8b50b69039452a3, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -8989,6 +9014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1198496133}
   - component: {fileID: 1198496134}
+  - component: {fileID: 1198496135}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9028,6 +9054,22 @@ MonoBehaviour:
   _vehicles:
   - {fileID: 470070888}
   - {fileID: 919132148962233437}
+  - {fileID: 1860605224}
+--- !u!114 &1198496135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198496132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b72b7b5cb59b6469cb3b3589e458a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vehicles:
+  - {fileID: 919132148962233437}
+  - {fileID: 470070888}
   - {fileID: 1860605224}
 --- !u!4 &1204157333 stripped
 Transform:
@@ -11638,17 +11680,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 1563572098}
   m_IsSelectable: 1
-  m_SelectedFaces: 07000000
-  m_SelectedEdges:
-  - a: 28
-    b: 29
-  - a: 31
-    b: 28
-  - a: 29
-    b: 30
-  - a: 30
-    b: 31
-  m_SelectedVertices: 1c0000001d0000001f0000001e000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!1001 &1385545974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13389,7 +13423,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh108922
+  m_Name: pb_Mesh461980
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13654,7 +13688,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh109200
+  m_Name: pb_Mesh462296
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16042,6 +16076,10 @@ PrefabInstance:
       propertyPath: _leadRoad
       value: Dirt
       objectReference: {fileID: 0}
+    - target: {fileID: 470070889, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
+      propertyPath: _maxSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1571078756, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -16100,7 +16138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3568826581575812226, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3568826581578078784, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17392,6 +17430,10 @@ PrefabInstance:
       propertyPath: _leadRoad
       value: Dirt
       objectReference: {fileID: 0}
+    - target: {fileID: 470070889, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
+      propertyPath: _maxSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 470070890, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
       propertyPath: _vehicles.Array.size
       value: 3
@@ -17458,7 +17500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3568826581575812226, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3568826581753384830, guid: a80e6899674fd6f4dbd253580d56502f, type: 3}
       propertyPath: m_Constraints
@@ -17541,6 +17583,10 @@ PrefabInstance:
     - target: {fileID: 4138614417921654242, guid: 3bc6498204ab9b74c8b50b69039452a3, type: 3}
       propertyPath: m_Constraints
       value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138614417921654246, guid: 3bc6498204ab9b74c8b50b69039452a3, type: 3}
+      propertyPath: _maxSpeed
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4138614417921654248, guid: 3bc6498204ab9b74c8b50b69039452a3, type: 3}
       propertyPath: _vehicles.Array.size
@@ -17658,6 +17704,10 @@ PrefabInstance:
     - target: {fileID: 6743065939641026490, guid: e16978a782561534cbbbad4e7c3a1303, type: 3}
       propertyPath: m_Name
       value: SportCar2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743065939641057553, guid: e16978a782561534cbbbad4e7c3a1303, type: 3}
+      propertyPath: _maxSpeed
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6743065939641057558, guid: e16978a782561534cbbbad4e7c3a1303, type: 3}
       propertyPath: m_Constraints

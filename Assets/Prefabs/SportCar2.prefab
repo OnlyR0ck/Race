@@ -796,6 +796,7 @@ MonoBehaviour:
   _leadRoad: Road
   _groundChecker: {fileID: 484310168}
   _confetti: {fileID: 3444061527914367160}
+  _maxSpeed: 8
   drivetrain: 2
   maxSteeringAngle: 0
   torque: 1000

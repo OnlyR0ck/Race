@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class MotoController : MonoBehaviour
 {
@@ -11,6 +7,8 @@ public class MotoController : MonoBehaviour
     [SerializeField] private string _leadRoad;
     [SerializeField] private Transform _groundChecker;
     [SerializeField] private ParticleSystem _confetti;
+    [SerializeField] private float _maxSpeed;
+
     
     
      public enum Drivetrain {FWD,
@@ -85,17 +83,7 @@ public class MotoController : MonoBehaviour
         if (!Physics.Raycast(_groundChecker.position, Vector3.down, out var hit, 10f)) return;
         if (!(hit.collider.CompareTag(_leadRoad) || hit.collider.CompareTag("Start")))
         {
-            foreach (var wheel in _wheelColliders)
-            {
-                wheel.brakeTorque = 1000;
-            }
-        }
-        else
-        {
-            foreach (var wheel in _wheelColliders)
-            {
-                wheel.brakeTorque = 0;
-            }
+            ClampSpeed(_maxSpeed / 6);//decrease speed when not at the lead road
         }
     }
 
@@ -104,6 +92,7 @@ public class MotoController : MonoBehaviour
         Accelerate();
         UpdateWheelPoses();
         GroundCheck();
+        ClampSpeed(_maxSpeed);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -112,5 +101,9 @@ public class MotoController : MonoBehaviour
         {
             _confetti.Play();
         }
+    }
+    private void ClampSpeed(float magnitude)
+    {
+        _motoRigidbody.velocity = Vector3.ClampMagnitude(_motoRigidbody.velocity, magnitude);
     }
 }

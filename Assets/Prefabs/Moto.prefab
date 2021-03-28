@@ -429,9 +429,10 @@ MonoBehaviour:
   _leadRoad: Hallway
   _groundChecker: {fileID: 4138614417699241925}
   _confetti: {fileID: 58397107013908955}
+  _maxSpeed: 8
   drivetrain: 2
   maxSteeringAngle: 0
-  torque: 1000
+  torque: 600
   frontRightWheel: {fileID: 4138614417806325450}
   frontLeftWheel: {fileID: 4138614417865735292}
   rearRightWheel: {fileID: 4138614418832029130}

@@ -29,7 +29,7 @@ public class EnemyListener : MonoBehaviour
             //vehicle.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(hit.normal));
         }
         vehicle.SetActive(true);
-        
+        vehicle.GetComponent<Rigidbody>().velocity  = Vector3.forward * 5f;
     }
     
     private GameObject GetActiveVehicle()
